@@ -23,6 +23,9 @@ export class GifsService {
 
 this._historial= JSON.parse(localStorage.getItem('historial')!) || [];
 
+//cargar los ultimos resultados
+this.resultados= JSON.parse(localStorage.getItem('resultados')!) || [];
+
 //Una forma de hacerlo
 // estricto !
 // if(localStorage.getItem('historial')){
@@ -52,7 +55,7 @@ this._historial= JSON.parse(localStorage.getItem('historial')!) || [];
      .subscribe((resp) => {
        console.log(resp.data);
        this.resultados=resp.data;
-
+       localStorage.setItem('resultados', JSON.stringify(this.resultados));
      });
 
      //suscripcion para la resolucion del get
