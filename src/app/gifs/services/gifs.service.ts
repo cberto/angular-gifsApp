@@ -17,7 +17,18 @@ export class GifsService {
     return [...this._historial];
   }
 
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient){
+
+//Cargar de localStorage
+
+this._historial= JSON.parse(localStorage.getItem('historial')!) || [];
+
+//Una forma de hacerlo
+// estricto !
+// if(localStorage.getItem('historial')){
+//   this._historial = JSON.parse(localStorage.getItem('historial')!) ;
+// }
+  }
 
   //insertar valoresres
   buscarGifs(query:string =''){
@@ -30,6 +41,9 @@ export class GifsService {
  this._historial.unshift(query);
  //cortar arreglo principal
  this._historial =this._historial.splice(0,10);
+
+ //Grabar en el LocalStorage, lo manda como string
+ localStorage.setItem('historial', JSON.stringify(this._historial));
     }
 
   //  console.log(this._historial);
